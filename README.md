@@ -1,19 +1,31 @@
 # ESTR2018 Course Project (Group YKL&TYH)
 
-### What is this project?
+## What is this project?
 This is a project for the [CUHK](https://cuhk.edu.hk) [ESTR2018/ENGG2760A course](https://www.cse.cuhk.edu.hk/wp-content/uploads/academics/ug/Courses/ENGG2760.pdf).
-#### Topic
+### Topic
 A peek into word embeddings using word2vec
-#### Goal
+### Goal
 1. To explore the use of probability in word2vec models.
 2. To find out the relationship between the conditional probability of a word appear given other words and similarity of words.
-#### Findings
-##### Softmax function
+### Findings
+#### Use of softmax function in vectorization during training
+##### Probability of outside context words appearing given a center word in Skip-Gram model:
+$$P(O=o|C=c) = \frac{e^{\vec{u_{o}^{T}} \cdot \vec{v_c}}}{\sum_{w \in Vocab} e^{\vec{u_{w}^{T}} \cdot \vec{v_c}}}$$
+and
+$$P(O=o|C=c) \in [0, 1]$$
+#### Cosine similarity reflects the similarity of words
+##### a hat and b hat are two vectors representing two words.
+$$\text{cosine similarity} = \cos{\theta} = \frac{\vec a \cdot \vec b}{|\vec a \cdot \vec b|} = \hat a \cdot \hat b$$
+and thus
+$$\cos{\theta} \in [{-1}, 1]$$
+and we have
+$$\text{cosine distance} = 1 - \cos{\theta}$$
+so
+$$\text{cosine distance} \in [0, 2]$$
 
-##### Cosine similarity
+<hr>
 
-
-### How to run the Python scripts?
+## How to run the Python scripts?
 1. Install the required libraries.
   - Install NumPy: `pip install numpy`
   - Install Gensim: `pip install gensim`
@@ -28,12 +40,12 @@ A peek into word embeddings using word2vec
     - Modify the filename of the train data and the target word for testing.
     - Run the script: `python word2vec-sg.py`
 
-### References
+## References
 1. Google Code - Word2Vec: https://code.google.com/archive/p/word2vec/
 2. Geeks4Geeks - Implement your own word2vec(skip-gram) model in Python: https://www.geeksforgeeks.org/implement-your-own-word2vecskip-gram-model-in-python/
 <hr>
 
-#### Project Progress
+## Progress
 
 - [x] Proposal
   - [x] Project subject, description and activities
