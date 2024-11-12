@@ -1,6 +1,6 @@
 # Developers: Yue Ka Leung, Tang Yu Hin
-# This script is used to implement Word2vec using the Skip-Gram model 
-
+# This script is used to implement the word2vec Skip-Gram model
+# Modified from https://www.geeksforgeeks.org/implement-your-own-word2vecskip-gram-model-in-python/
 
 # Importing the required libraries
 import numpy as np
@@ -10,62 +10,61 @@ import nltk
 nltk.download('stopwords')
  
 # Compute softmax values for each sets of scores in x.
-def softmax(x):
+def softmax(x): # x is an array
     e_x = np.exp(x - np.max(x))
-    return e_x / e_x.sum()
- 
+    return e_x / e_x.sum() # the sum of the returned array is 1 --> probability distribution
+
+# Define the word2vec class
 class word2vec(object):
     def __init__(self):
-        self.N = 10
-        self.X_train = []
+        self.N = 10 # number of neurons in the hidden layer of the neural network
+        self.X_train = [] # input layers
         self.y_train = []
         self.window_size = 2
         self.alpha = 0.001
         self.words = []
         self.word_index = {}
- 
-    def initialize(self,V,data):
-        self.V = V
-        self.W = np.random.uniform(-0.8, 0.8, (self.V, self.N))
-        self.W1 = np.random.uniform(-0.8, 0.8, (self.N, self.V))
+    
+    def initialize(self, V, data):
+        self.V = V # number of unqiue words in the vocabulary
+        self.W = np.random.uniform(-0.8, 0.8, (self.V, self.N)) # weights between input layer and hidden layer
+        self.W1 = np.random.uniform(-0.8, 0.8, (self.N, self.V)) # weights between hidden layer and output layer
          
         self.words = data
         for i in range(len(data)):
             self.word_index[data[i]] = i
  
-     
-    def feed_forward(self,X):
-        self.h = np.dot(self.W.T,X).reshape(self.N,1)
-        self.u = np.dot(self.W1.T,self.h)
-        #print(self.u)
-        self.y = softmax(self.u)  
+    # 
+    def feed_forward(self, X):
+        self.h = np.dot(self.W.T, X).reshape(self.N, 1) # hidden layer matrix
+        self.u = np.dot(self.W1.T, self.h) # output layer matrix
+        self.y = softmax(self.u) # output layer
         return self.y
          
-    def backpropagate(self,x,t):
-        e = self.y - np.asarray(t).reshape(self.V,1)
-        # e.shape is V x 1
-        dLdW1 = np.dot(self.h,e.T)
-        X = np.array(x).reshape(self.V,1)
-        dLdW = np.dot(X, np.dot(self.W1,e).T)
-        self.W1 = self.W1 - self.alpha*dLdW1
-        self.W = self.W - self.alpha*dLdW
+    def backpropagate(self, x, t):
+        e = self.y - np.asarray(t).reshape(self.V, 1)
+        dLdW1 = np.dot(self.h, e.T)
+        X = np.array(x).reshape(self.V, 1)
+        dLdW = np.dot(X, np.dot(self.W1, e).T)
+        self.W1 = self.W1 - self.alpha * dLdW1 # update W1
+        self.W = self.W - self.alpha * dLdW # update W2
          
-    def train(self,epochs):
-        for x in range(1,epochs):        
+    def train(self, epochs):
+        for x in range(1, epochs):        
             self.loss = 0
             for j in range(len(self.X_train)):
                 self.feed_forward(self.X_train[j])
-                self.backpropagate(self.X_train[j],self.y_train[j])
+                self.backpropagate(self.X_train[j], self.y_train[j])
                 C = 0
                 for m in range(self.V):
                     if(self.y_train[j][m]):
-                        self.loss += -1*self.u[m][0]
+                        self.loss += -1 * self.u[m][0]
                         C += 1
-                self.loss += C*np.log(np.sum(np.exp(self.u)))
-            print("epoch ",x, " loss = ",self.loss)
-            self.alpha *= 1/( (1+self.alpha*x) )
+                self.loss += C * np.log(np.sum(np.exp(self.u)))
+            print("epoch ", x, " loss = ", self.loss)
+            self.alpha *= 1/(1 + self.alpha*x)
             
-    def predict(self,word,number_of_predictions):
+    def predict(self, word, number_of_predictions):
         if word in self.words:
             index = self.word_index[word]
             X = [0 for i in range(self.V)]
@@ -76,9 +75,9 @@ class word2vec(object):
                 output[prediction[i][0]] = i
              
             top_context_words = []
-            for k in sorted(output,reverse=True):
+            for k in sorted(output, reverse=True):
                 top_context_words.append(self.words[output[k]])
-                if(len(top_context_words)>=number_of_predictions):
+                if(len(top_context_words) >= number_of_predictions):
                     break
      
             return top_context_words
@@ -94,8 +93,7 @@ def preprocessing(corpus):
     for i in range(len(sentences)):
         sentences[i] = sentences[i].strip()
         sentence = sentences[i].split()
-        x = [word.strip(string.punctuation) for word in sentence
-                                     if word not in stop_words]
+        x = [word.strip(string.punctuation) for word in sentence if word not in stop_words]
         x = [word.lower() for word in x]
         training_data.append(x)
     return training_data
@@ -106,7 +104,7 @@ def get_train_data(filename):
     corpus = fo.read()
     return corpus
 
-def prepare_data_for_training(sentences,w2v):
+def prepare_data_for_training(sentences, w2v):
     data = {}
     for sentence in sentences:
         for word in sentence:
@@ -120,21 +118,21 @@ def prepare_data_for_training(sentences,w2v):
     for i in range(len(data)):
         vocab[data[i]] = i
      
-    #for i in range(len(words)):
     for sentence in sentences:
         for i in range(len(sentence)):
             center_word = [0 for x in range(V)]
             center_word[vocab[sentence[i]]] = 1
             context = [0 for x in range(V)]
             
-            for j in range(i-w2v.window_size,i+w2v.window_size):
-                if i!=j and j>=0 and j<len(sentence):
+            for j in range(i - w2v.window_size, i + w2v.window_size):
+                if i != j and j >= 0 and j < len(sentence):
                     context[vocab[sentence[j]]] += 1
                     w2v.X_train.append(center_word)
                     w2v.y_train.append(context)
+
     w2v.initialize(V,data)
  
-    return w2v.X_train,w2v.y_train   
+    return w2v.X_train, w2v.y_train   
 
 # Can be adjusted for different text and target word
 filename = "train-data-1.txt"
@@ -146,7 +144,7 @@ corpus = get_train_data(filename)
 training_data = preprocessing(corpus)
 w2v = word2vec()
 
-prepare_data_for_training(training_data,w2v)
+prepare_data_for_training(training_data, w2v)
 w2v.train(epochs) 
 
-print(w2v.predict(target_word,3))  
+print(w2v.predict(target_word, 3))  # Predict the top 3 words that are similar to the target word

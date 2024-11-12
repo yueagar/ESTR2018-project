@@ -27,3 +27,11 @@ for word, similarity in similar_computer:
 similarity_computer_phone = model.similarity("computer", "phone")
 print("Similarity between the words \"computer\" and \"phone\": ")
 print(similarity_computer_phone)
+
+# x1 is to x2 as y1 is to ?
+def analogy(x1, x2, y1):
+    result = model.most_similar(positive=[y1, x2], negative=[x1])
+    return result[0][0]
+
+# Get the analogy
+print("Man is to the king as woman is to", analogy("man", "king", "woman")) # queen
