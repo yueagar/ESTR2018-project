@@ -15,7 +15,7 @@ and
 $$P(O=o|C=c) \in [0, 1]$$
 #### Cosine similarity reflects the similarity of words
 ##### a hat and b hat are two vectors representing two words.
-$$\text{cosine similarity} = \cos{\theta} = \frac{\vec a \cdot \vec b}{|\vec a \cdot \vec b|} = \hat a \cdot \hat b$$
+$$\text{cosine similarity} = \cos{\theta} = \frac{\vec a \cdot \vec b}{\lvert \vec a \cdot \vec b \rvert} = \hat a \cdot \hat b$$
 and thus
 $$\cos{\theta} \in [{-1}, 1]$$
 and we have
@@ -51,11 +51,11 @@ $$\text{cosine distance} \in [0, 2]$$
   - [x] Project subject, description and activities
 - [x] Presentation powerpoint slides
   - [x] Brief introduction to word embeddings and word2vec
-  - [x] Probability inside word2vec models
+  - [x] Probability in word2vec models
   - [ ] Demonstration of the code implementation
 - [x] Code implementation
   - [x] Use of the pre-trained Google News word2vec model
   - [x] Training of a Skip-Gram model
-- [ ] Final Report
+- [ ] Final report
   - [ ] Draft
   - [ ] Final LaTeX or Word file
