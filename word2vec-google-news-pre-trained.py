@@ -34,4 +34,4 @@ def analogy(x1, x2, y1):
     return result[0][0]
 
 # Get the analogy
-print("Man is to the king as woman is to", analogy("man", "king", "woman")) # queen
+print("Man is to king as woman is to", analogy("man", "king", "woman")) # queen

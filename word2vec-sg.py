@@ -18,7 +18,7 @@ def softmax(x): # x is an array
 class word2vec(object):
     def __init__(self):
         self.N = 10 # number of neurons in the hidden layer of the neural network
-        self.X_train = [] # input layers
+        self.X_train = []
         self.y_train = []
         self.window_size = 2
         self.alpha = 0.001
