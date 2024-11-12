@@ -10,12 +10,12 @@ A peek into word embeddings using word2vec
 ### Findings
 #### Use of softmax function in vectorization during training
 ##### Probability of outside context words appearing given a center word in Skip-Gram model:
-$$P(O=o|C=c) = \frac{e^{\vec{u_{o}^{T}} \cdot \vec{v_c}}}{\sum_{w \in Vocab} e^{\vec{u_{w}^{T}} \cdot \vec{v_c}}}$$
+$$P(O=o|C=c) = \frac{e^{\vec{u_{o}^{T}} \cdot \vec{v_{c}}}}{\sum_{w \in{Vocab}} e^{\vec{u_{w}^{T}} \cdot \vec{v_{c}}}}$$
 and
 $$P(O=o|C=c) \in [0, 1]$$
 #### Cosine similarity reflects the similarity of words
 ##### a hat and b hat are two vectors representing two words.
-$$\text{cosine similarity} = \cos{\theta} = \frac{\vec a \cdot \vec b}{\lvert \vec a \cdot \vec b \rvert} = \hat a \cdot \hat b$$
+$$\text{cosine similarity} = \cos{\theta} = \frac{\vec{a} \cdot \vec{b}}{\left\lvert \vec{a} \cdot \vec{b} \right\rvert} = \hat{a} \cdot \hat{b}$$
 and thus
 $$\cos{\theta} \in [{-1}, 1]$$
 and we have
