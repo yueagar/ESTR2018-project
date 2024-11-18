@@ -30,6 +30,8 @@ $$\text{cosine distance} \in [0, 2]$$
   - Install NumPy: `pip install numpy`
   - Install Gensim: `pip install gensim`
   - Install NLTK: `pip install nltk`
+  - Install scikit-learn: `pip install scikit-learn`
+  - Install Matplotlib: `pip install matplotlib`
 2. Clone this GitHub repository or directly download the files.
   - `git clone https://github.com/yueagar/ESTR2018-project.git`
 3. Modify and run the scripts.

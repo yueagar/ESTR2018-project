@@ -3,6 +3,8 @@
 
 # Importing the required libraries
 import gensim
+from sklearn.decomposition import PCA
+import matplotlib.pyplot as plt
 
 # Load Google's pre-trained Word2Vec model.
 # Google Word2Vec: https://code.google.com/archive/p/word2vec
@@ -35,3 +37,20 @@ def analogy(x1, x2, y1):
 
 # Get the analogy
 print("Man is to king as woman is to", analogy("man", "king", "woman")) # queen
+
+# Plot the word vectors using PCA
+# Reference: https://www.kaggle.com/code/chmasgun/word2vec-and-visualization-with-pca
+def plot_word_vectors(words):
+    word_vectors = [model[word] for word in words]
+    pca = PCA(n_components=2)
+    result = pca.fit_transform(word_vectors)
+    plt.scatter(result[:, 0], result[:, 1])
+    for i, word in enumerate(words):
+        plt.annotate(word, xy=(result[i, 0], result[i, 1]))
+    plt.show()
+
+# Plot the word vectors of the electronic devices using PCA
+plot_word_vectors(["computer", "phone", "keyboard", "mouse", "monitor", "printer", "laptop", "tablet", "smartphone"])
+
+# Plot the word vectors of some random words using PCA
+plot_word_vectors(["great", "cool", "brilliant", "wonderful", "well", "amazing", "worth", "sweet", "enjoyable", "boring", "bad", "dumb", "annoying", "female", "male", "queen", "king", "man", "woman", "rain", "snow", "hail", "coffee", "tea"])
