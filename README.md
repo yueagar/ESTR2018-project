@@ -52,7 +52,7 @@ $$\text{cosine distance} \in [0, 2]$$
 - [x] Presentation powerpoint slides
   - [x] Brief introduction to word embeddings and word2vec
   - [x] Probability in word2vec models
-  - [ ] Demonstration of the code implementation
+  - [x] Demonstration of the code implementation
 - [x] Code implementation
   - [x] Use of the pre-trained Google News word2vec model
   - [x] Training of a Skip-Gram model
