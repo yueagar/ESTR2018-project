@@ -25,6 +25,12 @@ print("Most similar words to the word \"computer\": ")
 for word, similarity in similar_computer:
     print(word, similarity)
 
+# Get the most similar words to the word good and print them
+similar_good = model.most_similar("good")
+print("Most similar words to the word \"good\": ")
+for word, similarity in similar_good:
+    print(word, similarity)
+
 # Get the similarity between the words computer and phone and print it
 similarity_computer_phone = model.similarity("computer", "phone")
 print("Similarity between the words \"computer\" and \"phone\": ")
