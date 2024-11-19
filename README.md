@@ -15,7 +15,7 @@ and
 $$P(O=o|C=c) \in [0, 1]$$
 #### Cosine similarity reflects the similarity of words
 ##### a hat and b hat are two vectors representing two words.
-$$\text{cosine similarity} = \cos{\theta} = \frac{\vec{a} \cdot \vec{b}}{\left\lvert \vec{a} \cdot \vec{b} \right\rvert} = \hat{a} \cdot \hat{b}$$
+$$\text{cosine similarity} = \cos{\theta} = \frac{\vec{a} \cdot \vec{b}}{\left\lvert \vec{a}\right\rvert \left\lvert \vec{b} \right\rvert} = \hat{a} \cdot \hat{b}$$
 and thus
 $$\cos{\theta} \in [{-1}, 1]$$
 and we have
