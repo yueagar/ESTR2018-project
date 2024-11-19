@@ -65,4 +65,4 @@ def plot_word_vectors(words):
 plot_word_vectors(["computer", "phone", "keyboard", "mouse", "monitor", "printer", "laptop", "tablet", "smartphone"])
 
 # Plot the word vectors of some random words using PCA
-plot_word_vectors(["great", "cool", "brilliant", "wonderful", "well", "amazing", "worth", "sweet", "enjoyable", "boring", "excellent", "good", "bad", "dumb", "annoying", "female", "male", "queen", "king", "man", "woman", "rain", "snow", "hail", "coffee", "tea"])
+plot_word_vectors(["great", "cool", "brilliant", "wonderful", "well", "amazing", "worth", "sweet", "enjoyable", "boring", "excellent", "good", "bad", "dumb", "annoying", "female", "male", "queen", "king", "man", "woman", "rain", "snow", "hail", "coffee", "tea", "drinks", "food"])
